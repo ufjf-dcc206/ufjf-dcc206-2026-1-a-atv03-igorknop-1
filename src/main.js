@@ -1,4 +1,8 @@
 import './style.css'
-import { setupRootApp } from './setupRootApp.js'
+import { setupEvents, setupRootApp } from './setupRootApp.js'
+import { iniciaLista } from './lista.js';
 
-document.querySelector('#app').append(setupRootApp());
+const app = document.querySelector('#app');
+iniciaLista();
+app.append(setupRootApp());
+setupEvents(app);
