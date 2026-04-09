@@ -1,23 +1,22 @@
 import { expect, test } from "vitest";
-import { setupRootApp } from "./setupRootApp";
-import { setupCounter } from "./counter";
+import { setupEvents, setupRootApp } from "./setupRootApp";
+import { iniciaLista, limpaLista } from "./lista";
 
-test("Que tenha um título na página", ()=>{
-
-    const app = document.createElement("div");
-    app.innerHTML = setupRootApp();
-    const h1 = app.querySelector("h1");
-    expect(h1.textContent).toBe("Get started");
-
+test("Que tenha um título na página", () => {
+  const app = document.createElement("div");
+  app.append(setupRootApp());
+  const h1 = app.querySelector("h1");
+  expect(h1.textContent).toBe("App de lista");
 });
 
-test("Quando clica no botão deve incrementar", ()=>{
-    const app = document.createElement("div");
-    app.innerHTML = setupRootApp();
-    const botao = app.querySelector("button");
-    setupCounter(botao);
-    expect(botao.textContent).toBe("Count is 0");
-    botao.click();
-    expect(botao.textContent).toBe("Count is 1");
-
+test("Quando clica no botão atualizar deve ter 3 itens", () => {
+  const app = document.createElement("div");
+  app.append(setupRootApp());
+  setupEvents(app);
+  iniciaLista();
+  const botao = app.querySelector("#atualizar");
+  expect(botao.textContent).toBe("Atualizar");
+  botao.click();
+  const ol = app.querySelector("ol");
+  expect(ol.children.length).toBe(3);
 });
