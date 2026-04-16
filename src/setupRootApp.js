@@ -3,6 +3,7 @@ import { getLista } from "./lista";
 export function setupRootApp() {
   const divRoot = document.createElement("div");
   divRoot.append(criaTitulo());
+  divRoot.append(criaForm());
   divRoot.append(criaLista());
   return divRoot;
 }
@@ -25,6 +26,33 @@ function criaTitulo() {
   const h1 = document.createElement("h1");
   h1.textContent = "App de lista";
   return h1;
+}
+
+function criaForm() {
+  const divForm = document.createElement("div");
+  const form = document.createElement("form");
+  form.name = "entrada"
+  divForm.append(form);
+  const input = document.createElement("input");
+  input.name = "texto";
+  form.append(input);
+  const button = document.createElement("button");
+  button.textContent = "Adicionar";
+  form.append(button);
+  setupFormSubmit(form);
+  return divForm;
+}
+
+function setupFormSubmit(form){
+  form.addEventListener("submit", (evento)=>{
+    evento.preventDefault();
+    console.log("Formulário enviado!!");
+    console.log(document.entrada.texto.value);
+    document.entrada.texto.value = "";
+    document.entrada.texto.focus();
+    
+
+  })
 }
 
 export function setupEvents(root){
