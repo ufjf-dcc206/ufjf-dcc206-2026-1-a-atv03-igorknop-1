@@ -6,4 +6,4 @@ const app = document.querySelector('#app');
 iniciaLista();
 app.append(setupRootApp());
 setupEvents(app);
-atualizarListaNaTela();
+atualizarListaNaTela(app);

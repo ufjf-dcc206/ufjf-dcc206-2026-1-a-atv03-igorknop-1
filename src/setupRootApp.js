@@ -4,6 +4,7 @@ export function setupRootApp() {
   const divRoot = document.createElement("div");
   divRoot.append(criaTitulo());
   divRoot.append(criaForm());
+  setupFormSubmit(divRoot);
   divRoot.append(criaLista());
   return divRoot;
 }
@@ -39,17 +40,17 @@ function criaForm() {
   const button = document.createElement("button");
   button.textContent = "Adicionar";
   form.append(button);
-  setupFormSubmit(form);
   return divForm;
 }
 
-function setupFormSubmit(form) {
+function setupFormSubmit(root) {
+  const form = root.querySelector("form");
   form.addEventListener("submit", (evento) => {
     evento.preventDefault();
     console.log("Formulário enviado!!");
     console.log(document.entrada.texto.value);
     adicionaNaLista(document.entrada.texto.value);
-    atualizarListaNaTela();
+    atualizarListaNaTela(root);
     document.entrada.texto.value = "";
     document.entrada.texto.focus();
   });
@@ -57,12 +58,12 @@ function setupFormSubmit(form) {
 
 export function setupEvents(root) {
   const btnAtualizar = root.querySelector("#atualizar");
-  btnAtualizar.addEventListener("click", atualizarListaNaTela);
+  btnAtualizar.addEventListener("click", ()=>atualizarListaNaTela(root));
 }
 
-export function atualizarListaNaTela() {
+export function atualizarListaNaTela(root) {
   const lista = getLista();
-  const ol = document.querySelector("ol");
+  const ol = root.querySelector("ol");
   ol.innerHTML = "";
   for (let i = 0; i < lista.length; i++) {
     const li = document.createElement("li");

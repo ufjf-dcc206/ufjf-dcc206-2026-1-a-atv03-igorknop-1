@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { setupEvents, setupRootApp } from "./setupRootApp";
+import { atualizarListaNaTela, setupEvents, setupRootApp } from "./setupRootApp";
 import { getLista, iniciaLista, limpaLista } from "./lista";
 
 test("Que tenha um título na página", () => {
@@ -12,8 +12,9 @@ test("Que tenha um título na página", () => {
 test("Quando clica no botão atualizar deve ter 3 itens", () => {
   const app = document.createElement("div");
   app.append(setupRootApp());
-  setupEvents(app);
   iniciaLista();
+  setupEvents(app);
+  atualizarListaNaTela(app);
   const lista = getLista();
   expect(lista.length).toBe(3);
   const botao = app.querySelector("#atualizar");
