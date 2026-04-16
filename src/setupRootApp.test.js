@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { setupEvents, setupRootApp } from "./setupRootApp";
-import { iniciaLista, limpaLista } from "./lista";
+import { getLista, iniciaLista, limpaLista } from "./lista";
 
 test("Que tenha um título na página", () => {
   const app = document.createElement("div");
@@ -14,6 +14,8 @@ test("Quando clica no botão atualizar deve ter 3 itens", () => {
   app.append(setupRootApp());
   setupEvents(app);
   iniciaLista();
+  const lista = getLista();
+  expect(lista.length).toBe(3);
   const botao = app.querySelector("#atualizar");
   expect(botao.textContent).toBe("Atualizar");
   botao.click();

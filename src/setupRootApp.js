@@ -57,14 +57,12 @@ function setupFormSubmit(form) {
 
 export function setupEvents(root) {
   const btnAtualizar = root.querySelector("#atualizar");
-  btnAtualizar.addEventListener("click", ()=>{
-    atualizarListaNaTela()
-  });
+  btnAtualizar.addEventListener("click", atualizarListaNaTela);
 }
 
 export function atualizarListaNaTela() {
-  const ol = document.querySelector("ol")
   const lista = getLista();
+  const ol = document.querySelector("ol");
   ol.innerHTML = "";
   for (let i = 0; i < lista.length; i++) {
     const li = document.createElement("li");
